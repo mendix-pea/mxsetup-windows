@@ -11,23 +11,29 @@ https://docs.mendix.com/developerportal/deploy/deploy-mendix-on-microsoft-window
 
 
 # Setup
-<pre>
-
-- Determine that your VM or server is allowed to receive traffic over port 80.
-    
 
 - Log on to your Windows VM/server as administrator.
 
-
-- Copy the following files from your computer to the desktop of this machine:
+- Copy the following files from your computer to the server desktop. These are also provided in the <code>bin/</code> folder for your convenience.
     - .mda you wish to deploy
     - .exe for Mendix Service Console installer.
+    <br><br>
     
+- Copy the three Powershell scripts A, B and C onto the server desktop. 
+<br><br>
 
-- Search for 'Windows Powershell ISE (integrated scripting environment)' and launch it as administrator. Paste the provided Powershell script and also save it to the desktop. Hit the play button (Run Script, F5) to run this script.
+- Search for 'Windows Powershell ISE (integrated scripting environment)' and launch it as administrator. Drag the scripts A, B, C into the ISE to open them. 
+<br><br>
 
+- Script A
+    - Hit the play button (Run Script, F5). This will start installing the prerequisites one by one, as indicated by the progress messages in console below. The whole script should take approximately 15 minutes or so. Postgres installation takes the longest (about 10 minutes). The script may seem stuck at this step, but please be patient and let the script finish.
+    <br><br>
 
-- The script will start installing the prerequisites one by one, as indicated by the progress messages in console. The whole script should take approximately 15 minutes or so to run. Of all the prerequisites, postgres takes the longest (about 10 minutes). So please be patient and let the script finish running.
+- Script B
+    - These steps are to be followed manually because we have not yet found a way to automate the installation of the Mendix Service Console.
 
+    - Run the service console installer and enter details as discussed in the guidelines.
+    <br><br>
 
-</pre>
+- Script C
+

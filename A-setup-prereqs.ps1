@@ -1,5 +1,9 @@
+# local user for running mendix service console as a service 
+$svcUser = "mendix"
+$svcUserPwd = ConvertTo-SecureString("M3nd1x1234!") -AsPlainText -Force
+
 # -------------------------------------------------------------
-# STEP 2: Install Prerequisites 
+# Install Prerequisites 
 # -------------------------------------------------------------
 #
 # install choco package manager in an elevated powershell
@@ -17,30 +21,28 @@ choco install urlrewrite -y
 # openjdk 11 required by Mendix Service Console 
 choco install openjdk11 -y
 
-# DIAGNOSTIC
+# diagnostic
 # chrome for local testing purposes
 choco install googlechrome -y
 
 # install a local postgres 14 database for a quick way to have a database for the Mendix app 
 # this takes the longest (about 5-10 mins), so skip if using some other non-local database for this setup 
 # username=postgres,pw=test
-choco install -v postgresql14 --params '/Password:test /Port:5432' --ia '--enable-components server,commandlinetools' -y
-
-
-# create local user
-#New-LocalUser -Name "mendix" -Password $pwd -Description "Local service account for Mendix Service Console" -FullName "Mendix Service Account User" -AccountNeverExpires -UserMayNotChangePassword 
-New-LocalUser -Name $svcUser -Password $svcUserPwd -Description "Local service account for Mendix Service Console" -FullName "Mendix Service Account User" -AccountNeverExpires -UserMayNotChangePassword 
-
-# assign 'logon as service' permission
-choco install Carbon -y
-Import-Module 'Carbon'
-$Identity = "mendix"
-$privilege = "SeServiceLogonRight"
-$CarbonDllPath = "C:\Program Files\WindowsPowerShell\Modules\Carbon\bin\fullclr\Carbon.dll"
-[Reflection.Assembly]::LoadFile($CarbonDllPath)
-[Carbon.Security.Privilege]::GrantPrivileges($Identity, $privilege)
+choco install postgresql14 --params '/Password:test /Port:5432' --ia '--enable-components server,commandlinetools' -y
 
 
 # folder for storing all mendix apps
 # to be selected when setting up the service console in the next step
 New-Item -Path 'C:\' -Name 'Mendix' -ItemType Directory
+
+
+# create local service user
+# assign 'logon as service' permission
+New-LocalUser -Name $svcUser -Password $svcUserPwd -Description "Local service account for Mendix Service Console" -FullName "Mendix Service Account User" -AccountNeverExpires -UserMayNotChangePassword 
+choco install Carbon -y
+Import-Module 'Carbon'
+$Identity = $svcUser
+$privilege = "SeServiceLogonRight"
+$CarbonDllPath = "C:\Program Files\WindowsPowerShell\Modules\Carbon\bin\fullclr\Carbon.dll"
+[Reflection.Assembly]::LoadFile($CarbonDllPath)
+[Carbon.Security.Privilege]::GrantPrivileges($Identity, $privilege)

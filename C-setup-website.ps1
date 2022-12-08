@@ -1,9 +1,5 @@
-# local user for running mendix service console as a service 
-$svcUser = "mendix"
-$svcUserPwd = ConvertTo-SecureString("M3nd1x1234!") -AsPlainText -Force
-
 # -------------------------------------------------------------
-# STEP 5: Configuring IIS Server 
+# Configuring IIS Server 
 # -------------------------------------------------------------
 Import-Module WebAdministration
 cd IIS:\Sites
