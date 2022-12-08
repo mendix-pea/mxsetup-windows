@@ -14,11 +14,7 @@ https://docs.mendix.com/developerportal/deploy/deploy-mendix-on-microsoft-window
 
 - Log on to your Windows VM/server as administrator.
 
-- Copy these files to the server desktop. They are provided in the <code>bin/</code> folder.
-    - .mda you wish to deploy
-    - .exe for Mendix Service Console installer. <br><br>
-    
-- Copy the three Powershell scripts A, B and C onto the server desktop. <br><br>
+- Copy all the files in this repo to the server desktop. 
 
 - Search for 'Windows Powershell ISE (integrated scripting environment)' and launch it as administrator. Drag the scripts A, B, C into the ISE to open them. <br><br>
 
@@ -33,9 +29,10 @@ https://docs.mendix.com/developerportal/deploy/deploy-mendix-on-microsoft-window
 
 
 - Script C
-    - Hit the play button (Run Script, F5). This will configure an IIS website as required. 
-    
-    - You can visit the IP address or DNS name of your server It should serve the Mendix app. Make sure that your server is accessible over port 443.
+    - Hit the play button (Run Script, F5). This will configure an IIS website as required. <br><br>
 
-    - You should be able to login to your app using the MxAdmin user. Its password can be set in the Mendix Service Console > Advanced Options. You will need to restart the service for the password change to become effective.
+- In your browser, navigate to the IP address or DNS name of your server. It should serve the Mendix app over port 80. Make sure that your server is accessible over this port.
+<br><br>
+
+- You should be able to login to your app using the MxAdmin user. Its password can be set in the Mendix Service Console > Advanced Options. You will need to restart the service for the password change to become effective.<br><br>
 
